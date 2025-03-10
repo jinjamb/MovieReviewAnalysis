@@ -1,7 +1,7 @@
 import string
 import os
 
-folder = "C:\\Users\\maxim\\Desktop\\UNIVM1S2\\NLP\\SentimentAnalysis\\smallsamplepos"
+folder = ".\\SentimentAnalysis\\smallsamplepos"
 path = os.path.realpath(folder)
 
 def clean_text(text):
