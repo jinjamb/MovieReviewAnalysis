@@ -1,0 +1,2 @@
+# Ignore the 'cleaned' folder created by data_cleaner.py
+cleaned/
