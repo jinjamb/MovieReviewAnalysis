@@ -21,13 +21,9 @@ if __name__ == "__main__":
         for filename in os.listdir(folder):
             f = os.path.join(folder, filename)
             if os.path.isfile(f):
-                print(f)
-                print("\n")
                 with open(f, 'r') as file:
                     text = file.read()
                     cleaned_text = clean_text(text)
-                    print(cleaned_text)
-                    print("\n")
                     if "pos" in f:
                         with open(os.path.join("..\\SentimentAnalysis\\smallsamplepos\\cleaned", filename), 'w') as cleaned_file:
                             cleaned_file.write(cleaned_text)
