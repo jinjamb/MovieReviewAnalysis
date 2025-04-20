@@ -2,6 +2,10 @@
 
 Short NLP project to determine sentiment using movie reviews.
 
+## 👉 Preliminary Step
+
+Clone the repository or install the .zip archive.
+
 ## 🚀 First Step: Install Dependencies
 
 Install all the necessary Python packages using pip:
