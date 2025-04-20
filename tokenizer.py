@@ -4,9 +4,6 @@ import numpy as np
 import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
-# LogisticRegression to add shades to the model, appreciation level.
-from sklearn.linear_model import LogisticRegression
-from nltk.sentiment import SentimentIntensityAnalyzer
 import os
 
 #pos_folder = ".\\smallsamplepos\\cleaned" 
@@ -130,9 +127,6 @@ if __name__ == "__main__":
     classifier.fit(X_train, y_train)
     X_sample = vectorizer.transform(sample_docs)
     probability = classifier.predict_proba(X_sample)
-
-
-     
 
     print("\n--- Probabilités par document (nég vs pos) ---")
     for i, (p_neg, p_pos) in enumerate(probability, 1):
