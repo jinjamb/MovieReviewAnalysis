@@ -39,7 +39,7 @@ def load_data_from_folder(folder, label):
     
     return texts, labels
 
-def create_tfidf_vectors(pos_folder, neg_folder, ngram_range=(1, 3), min_df=5, max_features=20000):
+def create_tfidf_vectors(pos_folder, neg_folder, ngram_range=(1, 3), min_df=5, max_features=40000):
     print("Chargement des critiques positives...")
     pos_texts, pos_labels = load_data_from_folder(pos_folder, 1)
     print(f"Nombre de critiques positives chargées: {len(pos_texts)}")
@@ -92,9 +92,9 @@ if __name__ == "__main__":
     vectorizer, X_train, y_train, X_test, y_test = create_tfidf_vectors(
         pos_folder=pos_folder, 
         neg_folder=neg_folder,
-        ngram_range=(1, 2),
+        ngram_range=(1, 3),
         min_df=5,
-        max_features=20000
+        max_features=40000
     )
 
     print("[CHECK] Vecteurs TF-IDF créés et sauvegardés avec succès.")
@@ -104,16 +104,14 @@ if __name__ == "__main__":
     pos_texts, _ = load_data_from_folder(pos_folder, 1)
     neg_texts, _ = load_data_from_folder(neg_folder, 0)
     #sample_docs = random.sample(pos_texts, min(10, len(pos_texts))) + random.sample(neg_texts, min(10, len(neg_texts)))
-    #sample_docs = random.sample(pos_texts,10) + random.sample(neg_texts,10)
-    '''
+    sample_docs = random.sample(pos_texts,4) + random.sample(neg_texts,4)
     print("\n--- Visualisation TF‑IDF sur 10 exemples pos + 10 exemples neg ---")
     for i, doc in enumerate(sample_docs, 1):
         vec = vectorizer.transform([doc])
-        tokens_scores = sorted(zip(vec.indices, vec.data),key=lambda x: x[1],reverse=True)[:10]
-        print(f"\nDocument #{i} (label={'pos' if i<=10 else 'neg'}):")
+        tokens_scores = sorted(zip(vec.indices, vec.data),key=lambda x: x[1],reverse=True)[:4]
+        print(f"\nDocument #{i} (label={'pos' if i<=4 else 'neg'}):")
         for idx, score in tokens_scores:
             print(f"  {features[idx]:<20s} → {score:.3f}")
-    '''
 
     '''
     Test de classification avec Logistic Regression en utilisant les probabilités fournies par le modèle
