@@ -22,4 +22,4 @@ def load_movie_reviews():
 
 def main():
     nltk.download('movie_reviews')
-load_movie_reviews()
+    load_movie_reviews()
