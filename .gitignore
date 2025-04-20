@@ -1,2 +1,4 @@
 # Ignore the 'cleaned' folder created by data_cleaner.py
 cleaned/
+imdb_data/
+movie_reviews_texts/
