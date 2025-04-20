@@ -4,7 +4,7 @@ import os
 import numpy as np
 import pandas as pd
 
-nltk.download('movie_reviews')
+
 
 def load_movie_reviews():
     
@@ -20,4 +20,6 @@ def load_movie_reviews():
         with open(os.path.join(output_dir, f"review_{idx}_{label}.txt"), "w", encoding="utf-8") as f:
             f.write(review)
 
+def main():
+    nltk.download('movie_reviews')
 load_movie_reviews()

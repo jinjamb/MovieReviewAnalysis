@@ -14,8 +14,6 @@ neg_folder = ".\\imdb_data\\neg\\cleaned"
 
 output_dir = ".\\vectorized"
 
-os.makedirs(output_dir, exist_ok=True)
-
 def load_data_from_folder(folder, label):
     texts = []
     labels = []
@@ -88,7 +86,10 @@ def create_tfidf_vectors(pos_folder, neg_folder, ngram_range=(1, 3), min_df=5, m
     
     return vectorizer, X_train_tfidf, y_train, X_test_tfidf, y_test
 
-if __name__ == "__main__":
+def run_tokenizer():
+    
+    os.makedirs(output_dir, exist_ok=True)
+    
     vectorizer, X_train, y_train, X_test, y_test = create_tfidf_vectors(
         pos_folder=pos_folder, 
         neg_folder=neg_folder,

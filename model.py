@@ -112,7 +112,7 @@ def predict_example(model, vectorizer, text):
     
     return sentiment, probability
 
-if __name__ == "__main__":
+def train_model():
     print("[LOADING] Chargement des données vectorisées...")
     X_train, y_train, X_test, y_test, vectorizer = load_vectorized_data(vectorized_dir)
     

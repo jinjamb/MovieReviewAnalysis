@@ -2,13 +2,7 @@ import string
 import os
 
 #folders = [".\\smallsamplepos", ".\\smallsampleneg"]
-folders = [".\\imdb_data\\pos", ".\\imdb_data\\neg"]
 
-for folder in folders:
-    os.makedirs(os.path.join(folder, "cleaned"), exist_ok=True)
-
-pathpos = os.path.realpath(folders[0])
-pathneg = os.path.realpath(folders[1])
 
 #cleanedsamplepos = os.makedirs(".\\smallsamplepos\\cleaned", exist_ok=True)
 #cleanedsampleneg = os.makedirs(".\\smallsampleneg\\cleaned", exist_ok=True)
@@ -32,7 +26,15 @@ def clean_text(text):
     text = text.translate(str.maketrans('', '', string.punctuation))
     return text
 
-if __name__ == "__main__":
+def run_cleaner():
+    folders = [".\\imdb_data\\pos", ".\\imdb_data\\neg"]
+
+    for folder in folders:
+        os.makedirs(os.path.join(folder, "cleaned"), exist_ok=True)
+
+    pathpos = os.path.realpath(folders[0])
+    pathneg = os.path.realpath(folders[1])
+
     for folder in folders:
         for filename in os.listdir(folder):
             f = os.path.join(folder, filename)

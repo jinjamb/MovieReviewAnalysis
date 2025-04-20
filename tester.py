@@ -9,11 +9,6 @@ from print_color import print
 model_path = ".\\vectorized\\best_model.pkl"
 vectorizer_path = ".\\vectorized\\tfidf_vectorizer.pkl"
 
-with open(model_path, 'rb') as f:
-    model = pickle.load(f)
-
-with open(vectorizer_path, 'rb') as f:
-    vectorizer = pickle.load(f)
 
 def sentiment_shades(review):
     sia = SentimentIntensityAnalyzer()
@@ -34,6 +29,11 @@ def sentiment_shades(review):
     return results
 
 def predict_sentiment(text):
+    with open(model_path, 'rb') as f:
+        model = pickle.load(f)
+
+    with open(vectorizer_path, 'rb') as f:
+        vectorizer = pickle.load(f)
     """Prédit le sentiment d'un texte."""
     text_tfidf = vectorizer.transform([text])
     
@@ -71,34 +71,34 @@ reviews = ["This movie was fantastic!", "I did not like this movie at all.",
            "The plot was very interesting and engaging.", "The acting was terrible and the script was boring.",
            "I would highly recommend this film to anyone.", "It was a waste of time."]
 """
+def take_random_reviews():
+    reviews = os.listdir("movie_reviews_texts")
 
-reviews = os.listdir("movie_reviews_texts")
+    pos_files = [r for r in reviews if "pos" in r]
+    neg_files = [r for r in reviews if "neg" in r]
+    selected_pos = random.sample(pos_files, 10)
+    selected_neg = random.sample(neg_files, 10)
+    positive_reviews = []
+    negative_reviews = []
 
-pos_files = [r for r in reviews if "pos" in r]
-neg_files = [r for r in reviews if "neg" in r]
-selected_pos = random.sample(pos_files, 10)
-selected_neg = random.sample(neg_files, 10)
-positive_reviews = []
-negative_reviews = []
+    for review in selected_pos + selected_neg:
+        with open(f"movie_reviews_texts/{review}", 'r', encoding='utf-8') as f:
+            content = f.read()
+            predict_sentiment(content)
+            if "pos" in review:
+                positive_reviews.append(content)
+            else:
+                negative_reviews.append(content)
 
-for review in selected_pos + selected_neg:
-    with open(f"movie_reviews_texts/{review}", 'r', encoding='utf-8') as f:
-        content = f.read()
-        predict_sentiment(content)
-        if "pos" in review:
-            positive_reviews.append(content)
-        else:
-            negative_reviews.append(content)
+    print("\n10 Positive Reviews:")
+    for pos_review in positive_reviews:
+        predict_sentiment(pos_review)
+        print("-" * 50)
 
-print("\n10 Positive Reviews:")
-for pos_review in positive_reviews:
-    predict_sentiment(pos_review)
-    print("-" * 50)
-
-print("\n10 Negative Reviews:")
-for neg_review in negative_reviews:
-    predict_sentiment(neg_review)
-    print("-" * 50)
+    print("\n10 Negative Reviews:")
+    for neg_review in negative_reviews:
+        predict_sentiment(neg_review)
+        print("-" * 50)
 
 """
 
@@ -117,4 +117,6 @@ def test_interactive():
             break
         predict_sentiment(user_input)
 
-test_interactive()
+def main():
+    take_random_reviews()
+    test_interactive()
