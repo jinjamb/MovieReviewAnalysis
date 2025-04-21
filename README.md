@@ -32,7 +32,7 @@ Unzip the archive.zip file in the root directory of the project.
 ## ▶️ Third Step: Prepare the Dataset
 Execute the main script and follow the instructions displayed in your terminal:
 ```bash
-python main.py
+python3 main.py
 ```
 
 
